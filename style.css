@@ -4,7 +4,7 @@
     box-sizing: border-box;
 }
 
-.bar {
+.bar, .pie {
     width: 500px;
-    margin: 10px auto;
+    margin: 100px auto;
 }
