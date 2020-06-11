@@ -1,3 +1,5 @@
+var url = "http://157.230.17.132:4032/sales"
+
 var venditeMensili = {};
 
 var venditePersonali = {};
@@ -6,7 +8,9 @@ var totaleVendite = 0
 
 $.ajax({
 
-    "url": "http://157.230.17.132:4032/sales",
+    "url": url,
+
+    'method': 'GET',
 
     "success": function(sales) {
 
@@ -126,6 +130,7 @@ function calcoloVenditori(a,b,c) {
 
 }
 
+// funzione per disegnare il grafico a torta (grafico2)
 function pieChart(a,b) {
 
     var ctxP = document.getElementById('pieChart').getContext('2d');
@@ -167,15 +172,81 @@ function pieChart(a,b) {
 
 }
 
-function calcoloPercentuale (a) {
+// funzione per il calcolo della percentuale
+
+function calcoloPercentuale(a) {
 
     for (var key in a) {
 
         var percentualeVenditore = (a[key] * 100 / totaleVendite).toFixed(1);
 
-        console.log(percentualeVenditore);
-
         a[key] = percentualeVenditore;
     }
+
+}
+
+// funzione per selezionare la data
+$(".month").change(
+
+    function() {
+
+        var month = $(".month").val()
+
+        if (month == 4 || month == 6 || month == 9 || month == 11) {
+
+            $(".data-a").hide()
+
+        } else if (month == 2) {
+
+            $(".data-b").hide()
+
+        } else {
+
+            $(".data-b").show()
+
+        }
+    }
+);
+
+$(".request").click(sendRequest)
+
+function sendRequest() {
+
+    var salesman = $(".salesman").val()
+
+    var amount = parseInt($(".amount").val())
+
+    console.log(amount);
+
+    var date = $(".day").val() + "/" + $(".month").val() + "/" + "2017"
+
+    $.ajax ({
+
+        "url": url,
+
+        "method": "POST",
+
+        "data" : {
+
+            "salesman" : salesman,
+
+            "amount" : amount,
+
+            "date" : date
+        },
+
+        "success": function() {
+
+        alert("Chiamata riuscita!")
+
+        },
+
+        "error": function() {
+
+        alert("Chiamata fallita, si prega di riprovare...");
+
+        }
+    });
+
 
 }
