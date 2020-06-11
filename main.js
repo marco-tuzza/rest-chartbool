@@ -18,13 +18,15 @@ $.ajax({
 
             var check = moment(sales[i].date, 'DD/MM/YYYY');
 
+            var amountParse = parseInt(sales[i].amount)
+
             var mese = check.format('M');
 
-            calcoloAnnuo(venditeMensili, mese, sales[i].amount)
+            calcoloAnnuo(venditeMensili, mese, amountParse)
 
-            calcoloVenditori(venditePersonali, sales[i].salesman, sales[i].amount)
+            calcoloVenditori(venditePersonali, sales[i].salesman, amountParse)
 
-            totaleVendite += sales[i].amount
+            totaleVendite += amountParse
 
         };
 
@@ -169,7 +171,6 @@ function pieChart(a,b) {
         }
     });
 
-
 }
 
 // funzione per il calcolo della percentuale
@@ -216,8 +217,6 @@ function sendRequest() {
 
     var amount = parseInt($(".amount").val())
 
-    console.log(amount);
-
     var date = $(".day").val() + "/" + $(".month").val() + "/" + "2017"
 
     $.ajax ({
@@ -247,6 +246,5 @@ function sendRequest() {
 
         }
     });
-
 
 }
