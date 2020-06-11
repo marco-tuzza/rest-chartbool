@@ -5,6 +5,19 @@
 }
 
 .bar, .pie {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     width: 500px;
-    margin: 100px auto;
+    margin: 80px auto;
+}
+
+h2 {
+    margin-bottom: 30px;
+}
+
+
+main {
+    display: flex;
+    align-items: center;
 }
