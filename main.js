@@ -6,9 +6,13 @@ var venditePersonali = {};
 
 var totaleVendite = 0
 
+disegnaGrafici (url)
+
+function disegnaGrafici (a) {
+
 $.ajax({
 
-    "url": url,
+    "url": a,
 
     'method': 'GET',
 
@@ -45,6 +49,8 @@ $.ajax({
     }
 
 })
+
+};
 
 // funzione per il calcolo delle vendite annuali (grafico 1)
 function calcoloAnnuo(a,b,c) {
@@ -136,6 +142,8 @@ function calcoloVenditori(a,b,c) {
 function pieChart(a,b) {
 
     var ctxP = document.getElementById('pieChart').getContext('2d');
+
+    console.log(ctxP);
 
     var myChart = new Chart(ctxP, {
         type: 'pie',
@@ -246,5 +254,13 @@ function sendRequest() {
 
         }
     });
+
+    $("canvas").empty()
+
+    disegnaGrafici (url)
+
+    $(".bar").append("<canvas id='barChart'></canvas>")
+
+    $(".pie").append("<canvas id='pieChart'></canvas>")
 
 }
